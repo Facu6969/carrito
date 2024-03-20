@@ -1,4 +1,4 @@
-// productos disponibles con su precio
+// productos disponibles y precio
 let productos = {
     "remera": 4000,
     "buzo": 10000,
@@ -25,7 +25,7 @@ let productos = {
     alert("¡Usuario registrado con exito! Ahora puedes iniciar sesión con tus credenciales.");
   }
   
-  // iniciar sesión
+  // iniciar sesion
   function iniciarSesion() {
     let usuario = prompt("Por favor, ingrese su nombre de usuario:");
     let contraseña = prompt("Por favor, ingrese su contraseña:");
