@@ -3,10 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./CSS/estilo.css">
     <title>Fernandez Pablo</title>
 </head>
 <body>
-    <h1>Carrito</h1>
+    <!--header-->
+    <header class="nav-container">
+        <nav class="navbar">
+            <h1 class="navbar-logo">Shop</h1>
+            <h1 class="ver-carrito" id="verCarrito">🛒<span id="cantidadCarrito" class="cantidad-carrito"></span></h1>
+        </nav>
+    </header>
+    <main>
+        <div class="banner">
+            <div class="banner-container">
+              <h1>SuperMarket Shop</h1>
+              <p>the best place to do your shopping</p>
+            </div>
+        </div>
+
+        <!--shop-->
+        <div id="shopContent" class="shop-content"></div>
+
+        <!--container-->
+        <div id="modal-container" class="modal-container"></div>
+    </main>
+    <footer>
+        <div class="copy">
+            <span class="copy-text">© 2024 Facu</span>
+        </div>
+    </footer>
     
 
     <script src="./JS/main.js"></script>
