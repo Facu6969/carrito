@@ -62,8 +62,8 @@ body {
     display: flex;
     justify-content: space-around;
     flex-wrap: wrap;
-    margin-left: 60px;
-    margin-right: 60px;
+    margin-left: 20px;
+    margin-right: 20px;
 }
 .card {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
@@ -75,12 +75,12 @@ body {
 }
   
 .card > img {
-    width: 90%;
-    height: 250px;
+    width: 180px;
+    height: 200px;
 }
   
 .price {
-   color: grey;
+   color: rgba(216, 19, 19, 0.4);
     font-size: 22px;
 }
   
@@ -170,8 +170,6 @@ body {
     padding: 10px;
     cursor: pointer;
 }
-  
-  /*se agregaron unas lineas de css con media querys para que se adapte mejor al responsive :)*/
 
   @media only screen and (max-width: 750px) {
     .modal-container {
@@ -197,7 +195,7 @@ body {
     cursor: pointer;
 }
   
-  /*CarritoCounter*/
+  /*Carrito*/
 .cantidad-carrito {
     background-color: red;
     color: white;
