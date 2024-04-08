@@ -195,7 +195,7 @@ body {
     cursor: pointer;
 }
   
-  /*Carrito*/
+  /*contador de articulos en el carrito*/
 .cantidad-carrito {
     background-color: red;
     color: white;
