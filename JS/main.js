@@ -57,7 +57,7 @@ function pintarCarrito() {
   modalContainer.innerHTML = "";
   modalContainer.style.display = "flex";
   const modalHeader = document.createElement("div");
-  modalHeader.calssName = "modal-header";
+  modalHeader.className = "modal-header";
   modalHeader.innerHTML = `
     <h1 class="modal-header-title">Carrito</h1>
   `;
