@@ -9,7 +9,6 @@ let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
 const getProducts = async () => {
   const respuesta = await fetch("./producto.json");
   const producto = await respuesta.json();
-  
   producto.forEach((product)=> {
     let content= document.createElement("div");
     content.className = "card";
@@ -55,9 +54,9 @@ const getProducts = async () => {
 getProducts();
 
 
-const saveLocal = () => {
+function saveLocal() {
   localStorage.setItem("carrito", JSON.stringify(carrito));
-};
+}
 
 
 // carrito //
@@ -81,6 +80,7 @@ function pintarCarrito() {
   });
 
   modalHeader.append(modalButton);
+
   carrito.forEach((product) => {
     let carritoContent = document.createElement("div");
     carritoContent.className = "modal-content";
@@ -92,6 +92,7 @@ function pintarCarrito() {
       <P>Cantidad : ${product.cantidad}</p>
       <span class="sumar"> + </span>
       <p>Total: $${product.cantidad * product.precio}</p>
+      <span class="delete-product"> ✖ </span>
     `;
     modalContainer.append(carritoContent);
 
@@ -112,12 +113,12 @@ function pintarCarrito() {
       pintarCarrito();
     });
 
-    let eliminar = document.createElement("span");
-    eliminar.innerText = "✖";
-    eliminar.className = "delete-product";
-    carritoContent.append(eliminar);
+    let eliminar = carritoContent.querySelector(".delete-product");
 
-    eliminar.addEventListener("click", eliminarProducto);
+    eliminar.addEventListener("click", () => {
+      eliminarProducto(product.id);
+    });
+    
   });
   const total = carrito.reduce((acc, el) => acc + el.precio * el.cantidad, 0);
 
@@ -129,8 +130,8 @@ function pintarCarrito() {
 
 verCarrito.addEventListener("click", pintarCarrito);
 
-const eliminarProducto = () => {
-  const foundId = carrito.find((element) => element.id);
+const eliminarProducto = (id) => {
+  const foundId = carrito.find((element) => element.id === id);
 
   carrito = carrito.filter((carritoId) => {
     return carritoId !== foundId;
@@ -144,11 +145,44 @@ const eliminarProducto = () => {
 const carritoCounter = () => {
   cantidadCarrito.style.display = "block";
 
-  const carritoLength = carrito.Length;
+  const carritoLength = carrito.length;
 
-  localStorage.setItem("carritoLenght", JSON.stringify(carritoLength));
+  localStorage.setItem("carritoLength", JSON.stringify(carritoLength));
 
   cantidadCarrito.innerText = JSON.parse(localStorage.getItem("carritoLength"));
+  
+};
+carritoCounter();
+
+
+
+// Agregar datos del dólar blue desde la API
+const obtenerDatosDolarBlue = async () => {
+  try {
+    const respuesta = await fetch('https://dolarapi.com/v1/dolares/blue');
+    const datos = await respuesta.json();
+    return datos;
+  } catch (error) {
+    console.error('Error al obtener los datos del dólar blue:', error);
+    return null;
+  }
 };
 
-carritoCounter();
+
+obtenerDatosDolarBlue().then((datos) => {
+  if (datos !== null) {
+    const contenidoPrincipal = document.getElementById('contenidoPrincipal');
+    contenidoPrincipal.innerHTML += `
+      <div>
+        <h2>Precio de compra: $${datos.compra}</h2>
+        <h2>Precio de venta: $${datos.venta}</h2>
+        <p>Última actualización: ${datos.nombre}</p>
+      </div>
+    `;
+  } else {
+    console.log('No se pudieron obtener los datos del dólar blue.');
+  }
+});
+
+
+
