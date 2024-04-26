@@ -9,8 +9,9 @@ body {
 }
 .navbar {
     display: flex;
+    padding: 5px;
     justify-content: space-between;
-    height: 12vh;
+    height: 65px;
     background-color: #1b1b1b;
 }
   
@@ -18,14 +19,14 @@ body {
     justify-self: start;
     margin-left: 20px;
     color: #fff;
-    margin-top: 4vh;
+    margin-top: 10px;
     cursor: pointer;
 }
   
 .ver-carrito {
     font-size: 25px;
     margin-right: 20px;
-    margin-top: 3.5vh;
+    margin-top: 10px;
     cursor: pointer;
 }
   
@@ -33,7 +34,6 @@ body {
 .banner {
     background-size: cover;
     background-position: center;
-    height: 50vh;
     background-image: linear-gradient(rgba(216, 19, 19, 0.4), rgba(134, 101, 101, 0.4));
 }
   
@@ -59,7 +59,7 @@ body {
   
   /*product cards*/
 .shop-content {
-    background-color: #000;
+    background-color: #f7f4f4;
     display: flex;
     justify-content: space-around;
     width: 100%;
@@ -77,19 +77,21 @@ body {
 .card > img {
     width: 180px;
     height: 200px;
+    border: 1px solid black;
 }
   
 .price {
    color: rgba(216, 19, 19, 0.4);
     font-size: 22px;
+    
 }
   
 .card button {
     border: none;
     outline: 0;
     padding: 12px;
-    color: rgb(10, 10, 10);
-    background-color: #faf9f9;
+    color: rgba(216, 19, 19, 0.4);
+    background-color: #111111;
     text-align: center;
     cursor: pointer;
     width: 100%;
@@ -116,6 +118,7 @@ body {
     z-index: 9;
     top: 12vh;
     scrollbar-color: none;
+    border-radius: 20px;
 }
   
 .modal-container::-webkit-scrollbar {
@@ -124,8 +127,8 @@ body {
 .modal-header {
     display: flex;
     justify-content: space-around;
-    background-color: #0a0909;
-    color: #fff;
+    background-color: #fff;
+    color: #121212;
     width: 100%;
 }
   
@@ -149,6 +152,7 @@ body {
 .modal-container > div > img {
     height: 120px;
     width: 120px;
+    border-radius: 5px;
 }
   
 .total-content {
@@ -160,8 +164,8 @@ body {
 
 .copy {
     height: 12vh;
-    background-color: #000;
-    color: #fff;
+    background-color: rgb(10, 10, 10);
+    color: #f7f3f3;
     padding-top: 20px;
 }
 
@@ -245,6 +249,12 @@ body {
     border-radius: 5px;
 }
 
+#dolarTarjeta{
+    top:66px;
+    left: 0;
+    width: 100%;
+    position:absolute;
+}
 .api-dolar{
     background-color: #000;
     width: 100%;
@@ -253,7 +263,8 @@ body {
 
 .scrolling-text h2{
     color: #faf9f9;
-    font-weight: 100;
+    font-weight:400;
+    font-size: medium;
 }
 
 .scrolling-text {
