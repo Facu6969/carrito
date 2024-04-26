@@ -7,7 +7,7 @@ const cantidadCarrito = document.getElementById("cantidadCarrito");
 let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
 
 const getProducts = async () => {
-  const respuesta = await fetch("./producto.json");
+  const respuesta = await fetch("./data/producto.json");
   const producto = await respuesta.json();
   producto.forEach((product)=> {
     let content= document.createElement("div");
@@ -60,6 +60,68 @@ function saveLocal() {
 
 
 // carrito //
+
+const crearBotonCompraTotal = () => {
+  const botonCompraTotal = document.createElement("button");
+  botonCompraTotal.textContent = "Comprar";
+  botonCompraTotal.className = "boton-compra-total";
+  botonCompraTotal.style.backgroundColor = "green";  
+  botonCompraTotal.style.color = "white"; 
+  botonCompraTotal.style.border = "10px"; 
+  botonCompraTotal.style.padding = "10px 20px"; 
+  botonCompraTotal.style.cursor = "pointer";
+  botonCompraTotal.style.margin = "20px auto";
+  botonCompraTotal.style.borderRadius = "5px";
+  botonCompraTotal.style.opacity = "0.8";
+  botonCompraTotal.addEventListener("mouseover", () => {
+    botonCompraTotal.style.opacity = "1";
+  });
+  
+  botonCompraTotal.addEventListener("mouseout", () => {
+    botonCompraTotal.style.opacity = "0.8";
+  }); 
+  botonCompraTotal.addEventListener("click", () => {
+
+    const swalWithBootstrapButtons = Swal.mixin({
+      customClass: {
+        confirmButton: "btn btn-success",
+        cancelButton: "btn btn-danger"
+      },
+      buttonsStyling: false
+    });
+    swalWithBootstrapButtons.fire({
+      title: "estas seguro?",
+      text: "¡No podrás revertir esto!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "si, comprar!",
+      cancelButtonText: "No, cancelar!",
+      reverseButtons: true
+    }).then((result) => {
+      if (result.isConfirmed) {
+        carrito = [];
+        carritoCounter();
+        saveLocal();
+        pintarCarrito();
+        swalWithBootstrapButtons.fire({
+          title: "comprado!",
+          text: "Tu compra ha sido completada con exito.",
+          icon: "success"
+        });
+      } else if (
+        result.dismiss === Swal.DismissReason.cancel
+      ) {
+        swalWithBootstrapButtons.fire({
+          title: "Cancelado",
+          text: "Tu compra ha sido cancelada :)",
+          icon: "error"
+        });
+      }
+    });
+  });
+  return botonCompraTotal;
+};
+
 
 function pintarCarrito() {
   modalContainer.innerHTML = "";
@@ -124,8 +186,15 @@ function pintarCarrito() {
 
   const totalCompra = document.createElement("div");
   totalCompra.className = "total-content";
-  totalCompra.innerHTML = `total a pagar: $${total}`;
+  totalCompra.innerHTML = `
+     <p>total a pagar: $${total}</p>
+  `;
   modalContainer.append(totalCompra);
+
+  // Agregar el botón de compra total 
+
+  const botonCompraTotal = crearBotonCompraTotal();
+  modalContainer.appendChild(botonCompraTotal);
 }
 
 verCarrito.addEventListener("click", pintarCarrito);
@@ -142,6 +211,7 @@ const eliminarProducto = (id) => {
   pintarCarrito();
 };
 
+
 const carritoCounter = () => {
   cantidadCarrito.style.display = "block";
 
@@ -156,33 +226,59 @@ carritoCounter();
 
 
 
-// Agregar datos del dólar blue desde la API
-const obtenerDatosDolarBlue = async () => {
+// Agregar datos del dólar tarjeta desde la API //
+const obtenerDatosDolarTarjeta = async () => {
   try {
-    const respuesta = await fetch('https://dolarapi.com/v1/dolares/blue');
+    const respuesta = await fetch("https://dolarapi.com/v1/dolares/tarjeta");
     const datos = await respuesta.json();
     return datos;
   } catch (error) {
-    console.error('Error al obtener los datos del dólar blue:', error);
+    console.error("Error al obtener los datos:", error);
     return null;
   }
 };
 
 
-obtenerDatosDolarBlue().then((datos) => {
+const formatearFecha = (fecha) => {
+  const date = new Date(fecha);
+  const dia = date.getDate();
+  const mes = date.toLocaleString('default', { month: 'long' });
+  const año = date.getFullYear();
+  const hora = date.getHours();
+  const minutos = date.getMinutes();
+  return `${dia}/ ${mes}/ ${año}, ${hora}:${minutos}Hs`;
+};
+
+obtenerDatosDolarTarjeta().then((datos) => {
   if (datos !== null) {
-    const contenidoPrincipal = document.getElementById('contenidoPrincipal');
-    contenidoPrincipal.innerHTML += `
-      <div>
-        <h2>Precio de compra: $${datos.compra}</h2>
-        <h2>Precio de venta: $${datos.venta}</h2>
-        <p>Última actualización: ${datos.nombre}</p>
+    const dolarTarjeta = document.getElementById("dolarTarjeta");
+    dolarTarjeta.innerHTML += `
+      <div class="api-dolar">
+        <div class="scrolling-text">
+          <h2>Dolar  ${datos.nombre}: Precio de compra: $${datos.compra}  Precio de venta: $${datos.venta}  Última actualización: ${formatearFecha(datos.fechaActualizacion)}</h2>
+        </div>
       </div>
     `;
   } else {
-    console.log('No se pudieron obtener los datos del dólar blue.');
+    console.log("No se pudieron obtener los datos.");
   }
 });
+
+const scrollingText = document.querySelector('.scrolling-text');
+const containerWidth = document.querySelector('.scrolling-text-container').offsetWidth;
+const textWidth = scrollingText.offsetWidth;
+
+// Calcular la duración de la animación basada en el ancho del texto y del contenedor
+const animationDuration = textWidth / containerWidth * 20; 
+
+scrollingText.style.animationDuration = animationDuration + 's';
+
+
+
+
+
+
+
 
 
 

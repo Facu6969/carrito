@@ -12,19 +12,19 @@
         <nav class="navbar">
             <h1 class="navbar-logo">LOGO</h1>
             <h2 class="ver-carrito" id="verCarrito">🛒<span id="cantidadCarrito" class="cantidad-carrito"></span></h2>
+            
         </nav>
     </header>
     <main>
-        <div id="contenidoPrincipal" class="contenido-principal">
-            <div id="precioCompra"></div>
-            <div id="precioVenta"></div>
-            <div id="ultimaActualizacion"></div>
-        </div>
+        
         <div class="banner">
             <div class="banner-container">
-              <h1>Valar Indumentaria</h1>
-              <p>Las mejores prendas para tus fiestas</p>
+                <!--API-->
+                <div id="dolarTarjeta" class="contenido-principal"></div>
+                <h1>Valar Indumentaria</h1>
+                <p>Las mejores prendas para tus fiestas</p>
             </div>
+            
         </div>
 
         <!--shop-->
@@ -32,12 +32,16 @@
 
         <!--container-->
         <div id="modal-container" class="modal-container"></div>
+        
     </main>
     <footer>
         <div class="copy">
             <span class="copy-text">© 2024 Facu</span>
         </div>
     </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.0/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="./JS/main.js"></script>
 </body>
 </html>

@@ -194,6 +194,9 @@ body {
 .delete-product {
     cursor: pointer;
 }
+.delete-product:hover{
+    color: green;
+}
   
   /*contador de articulos en el carrito*/
 .cantidad-carrito {
@@ -210,8 +213,54 @@ body {
   
 .sumar {
     cursor: pointer;
+    color: green;
+    font-size: 20px;
+    font-weight: 800;
 }
   
 .restar {
     cursor: pointer;
+    color: green;
+    font-size: 20px;
+    font-weight: 800;
+}
+
+.btn-success{
+    background-color:  green;
+    color:  white;
+    border:  10px;
+    padding:  10px 20px;
+    cursor:  pointer;
+    margin:  20px ;
+    border-radius: 5px;
+}
+
+.btn-danger{
+    background-color:  red;
+    color:  white;
+    border:  10px;
+    padding:  10px 20px;
+    cursor:  pointer;
+    margin:  20px ;
+    border-radius: 5px;
+}
+
+.api-dolar{
+    background-color: #000;
+    width: 100%;
+    overflow: hidden;
+}
+
+.scrolling-text h2{
+    color: #faf9f9;
+    font-weight: 100;
+}
+
+.scrolling-text {
+    animation: scrollText 15s linear infinite;
+}
+
+@keyframes scrollText {
+    0% { transform: translateX(100%); }
+    100% { transform: translateX(-100%); } 
 }
